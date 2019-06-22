@@ -1,0 +1,71 @@
+﻿<Window x:Class="RegistrationForCourseClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegistrationForCourseClient"
+        mc:Ignorable="d"
+        Title="Registration for course" Height="450" Width="610" Closing="Window_Closing">
+    <Window.Resources>
+        <Style x:Key="GridViewColumnHeaderStyle" TargetType="GridViewColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Width" Value="296" />
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="10,10,10,0" Orientation="Horizontal" >
+            <Label Name="labelSurname" Content="Your surname:" FontSize="15"/>
+            <TextBox Name="textBoxSurname" Width="174" Margin="0,0,11,0" FontSize="15" IsEnabled="False" VerticalContentAlignment="Center" TextChanged="TextBoxSurname_TextChanged"/>
+            <Button Name="buttonConnectToServer" Content="Connect to server" Width="120" FontSize="15" Click="ButtonConnectToServer_Click"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="10,10,10,0" Orientation="Horizontal" >
+            <Label Name="labelGradeByBasicsOfAlgorithms" Content="Grade by basics of algorithms:" FontSize="15"/>
+            <ComboBox Name="comboBoxGrade" Margin="10,0,10,0" Width="60" FontSize="15" IsEnabled="False" SelectionChanged="ComboBoxGrade_SelectionChanged"/>
+            <Button Name="buttonRegistration" Content="Registration" Width="97" FontSize="15" IsEnabled="False" Click="ButtonRegistration_Click"/>
+            <Button Name="buttonShowStatus" Content="Show registration status" Width="177" Margin="10,0,0,0" FontSize="15" IsEnabled="False" Click="ButtonShowStatus_Click"/>
+        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Name="Column1" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Name="Row1" />
+                <RowDefinition Name="Row2" Height="30"/>
+            </Grid.RowDefinitions>
+            <DockPanel LastChildFill="True" Name="dockPanelStudents" Grid.Column="1" Background="PowderBlue" Margin="0,5,0,0">
+                <Label Name="labelStudents" Content="Students, which have a much higher average grade" HorizontalAlignment="Center" FontSize="15" DockPanel.Dock="Top"/>
+                <ListView x:Name="listViewStudents" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Surname}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                                <GridViewColumnHeader Style="{StaticResource GridViewColumnHeaderStyle}">
+                                    <TextBlock Text="Surname" TextAlignment="Center" />
+                                </GridViewColumnHeader>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=GradeByBasicsOfAlgorithms}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                                <GridViewColumnHeader Style="{StaticResource GridViewColumnHeaderStyle}">
+                                    <TextBlock Text="Grade" TextAlignment="Center" />
+                                </GridViewColumnHeader>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </DockPanel>
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Background="LightBlue">
+                <Label Name="labelRegistrationStatus" Content="Registration status:" FontSize="15"/>
+                <Label Name="labelRegistrationStatusName" FontSize="15"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
